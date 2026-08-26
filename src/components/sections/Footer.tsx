@@ -1,13 +1,15 @@
 import {
-  Activity,
   ArrowRight,
   Clock3,
+  Instagram,
   Mail,
   MapPin,
   Phone,
+  Youtube,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { images } from "../../data/siteData";
+import { clinicInfo, images } from "../../data/siteData";
+import { LogoFull } from "../Logo";
 
 const quickLinks = [
   ["Home", "#home"],
@@ -75,23 +77,13 @@ export function Footer() {
           <a
             href="#home"
             className="group inline-flex items-center gap-3"
-            aria-label="Heritage Health home"
+            aria-label="Health Hunter home"
           >
-            <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-2xl bg-white text-emerald-950 shadow-[0_12px_30px_rgba(0,0,0,0.18)]">
-              <span className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-white" />
-
-              <Activity className="relative h-5 w-5" strokeWidth={2} />
-            </span>
-
-            <span>
-              <strong className="block text-xl font-semibold leading-tight tracking-[-0.025em] text-white">
-                Heritage Health
-              </strong>
-
-              <small className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.17em] text-white/45">
-                Physiotherapy Clinic
-              </small>
-            </span>
+            <LogoFull
+              textColor="#ffffff"
+              accentColor="#34d399"
+              className="h-10 sm:h-11 w-auto transition-transform duration-300 group-hover:scale-105"
+            />
           </a>
 
           <p className="mt-6 max-w-[290px] text-sm leading-6 text-white/60">
@@ -131,28 +123,31 @@ export function Footer() {
         <div>
           <h3 className="text-sm font-semibold text-white">Contact</h3>
 
-          <div className="mt-5 space-y-4">
+          <div className="mt-5 space-y-3.5">
+            {clinicInfo.phones.map((phone) => (
+              <a
+                key={phone.number}
+                href={`tel:${phone.tel}`}
+                className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                  <Phone className="h-4 w-4" />
+                </span>
+
+                <span>
+                  <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                    Call us
+                  </small>
+
+                  <strong className="mt-1 block text-sm font-medium">
+                    {phone.number}
+                  </strong>
+                </span>
+              </a>
+            ))}
+
             <a
-              href="tel:+919876543210"
-              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
-                <Phone className="h-4 w-4" />
-              </span>
-
-              <span>
-                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
-                  Call us
-                </small>
-
-                <strong className="mt-1 block text-sm font-medium">
-                  +91 98765 43210
-                </strong>
-              </span>
-            </a>
-
-            <a
-              href="mailto:care@heritagehealth.in"
+              href={`mailto:${clinicInfo.email}`}
               className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
             >
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
@@ -165,7 +160,49 @@ export function Footer() {
                 </small>
 
                 <strong className="mt-1 block break-all text-sm font-medium">
-                  care@heritagehealth.in
+                  {clinicInfo.email}
+                </strong>
+              </span>
+            </a>
+
+            <a
+              href={clinicInfo.instagram.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+            >
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                <Instagram className="h-4 w-4" />
+              </span>
+
+              <span className="min-w-0">
+                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                  Instagram
+                </small>
+
+                <strong className="mt-1 block break-all text-sm font-medium">
+                  @{clinicInfo.instagram.handle}
+                </strong>
+              </span>
+            </a>
+
+            <a
+              href={clinicInfo.youtube.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+            >
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                <Youtube className="h-4 w-4" />
+              </span>
+
+              <span className="min-w-0">
+                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                  YouTube
+                </small>
+
+                <strong className="mt-1 block break-all text-sm font-medium">
+                  {clinicInfo.youtube.handle}
                 </strong>
               </span>
             </a>
@@ -181,9 +218,7 @@ export function Footer() {
                 </small>
 
                 <strong className="mt-1 block text-sm font-medium leading-5">
-                  Mon–Sat
-                  <br />
-                  8:00 AM–8:00 PM
+                  {clinicInfo.hours}
                 </strong>
               </span>
             </div>
@@ -195,15 +230,15 @@ export function Footer() {
           <h3 className="text-sm font-semibold text-white">Find our clinic</h3>
 
           <a
-            href="https://maps.google.com/?q=Thaltej+Metro+Station+Ahmedabad"
+            href={clinicInfo.address.mapsUrl}
             target="_blank"
             rel="noreferrer"
             className="group relative mt-5 block h-[220px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-emerald-900 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
-            aria-label="View Heritage Health clinic on Google Maps"
+            aria-label="View Health Hunter clinic on Google Maps"
           >
             <motion.img
               src={images.map}
-              alt="Map showing Heritage Health clinic near Thaltej Metro Station"
+              alt="Map showing Health Hunter clinic at Gala Empire Memnagar"
               className="h-full w-full object-cover opacity-90"
               whileHover={
                 shouldReduceMotion
@@ -227,12 +262,12 @@ export function Footer() {
 
             <span className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-emerald-950/80 px-3.5 py-3 backdrop-blur-md">
               <span className="min-w-0">
-                <strong className="block text-xs font-semibold text-white">
-                  Heritage Health
+                <strong className="block truncate text-xs font-semibold text-white">
+                  309, Gala Empire, Memnagar
                 </strong>
 
                 <small className="mt-0.5 block truncate text-[10px] text-white/55">
-                  Near Thaltej Metro Station
+                  Opp. Doordarshan Metro, Ahmedabad
                 </small>
               </span>
 
@@ -246,7 +281,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex w-full max-w-[1170px] flex-col items-center justify-between gap-3 px-4 py-5 text-center sm:flex-row sm:px-6 sm:text-left lg:px-8">
           <p className="text-xs text-white/40">
-            © {currentYear} Heritage Health. All rights reserved.
+            © {currentYear} {clinicInfo.fullName}. All rights reserved.
           </p>
 
           <div className="flex items-center gap-5">

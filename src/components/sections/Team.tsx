@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BadgeCheck,
   CalendarDays,
+  Quote,
   Sparkles,
 } from "lucide-react";
 import {
@@ -9,22 +10,7 @@ import {
   type Variants,
   useReducedMotion,
 } from "framer-motion";
-import { images } from "../../data/siteData";
-
-const team = [
-  [
-    images.sarah,
-    "Dr. Sarah Jenkins",
-    "Senior Physiotherapist",
-    "Orthopaedic rehabilitation & pain management",
-  ],
-  [
-    images.michael,
-    "Dr. Michael D’souza",
-    "Sports Physiotherapist",
-    "Sports injury, mobility & performance recovery",
-  ],
-] as const;
+import { team } from "../../data/siteData";
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
@@ -114,9 +100,9 @@ export function Team() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
         >
-          {team.map(([photo, name, role, bio], index) => (
+          {team.map((member, index) => (
             <motion.article
-              key={name}
+              key={member.name}
               variants={fadeUp}
               className="group relative overflow-hidden rounded-[2rem] border border-emerald-950/8 bg-[#f7f8f4] p-3 shadow-[0_14px_40px_rgba(15,23,42,0.06)] transition-colors duration-300 hover:border-emerald-900/15 sm:p-4"
               whileHover={
@@ -135,8 +121,8 @@ export function Team() {
                 {/* Doctor image */}
                 <div className="relative min-h-[330px] overflow-hidden rounded-[1.5rem] bg-emerald-100 sm:min-h-[315px]">
                   <motion.img
-                    src={photo}
-                    alt={`${name}, ${role}`}
+                    src={member.photo}
+                    alt={`${member.name}, ${member.role}`}
                     className="absolute inset-0 h-full w-full object-cover object-top"
                     initial={{
                       scale: shouldReduceMotion ? 1 : 1.05,
@@ -166,41 +152,57 @@ export function Team() {
                 {/* Content */}
                 <div className="relative flex min-h-[270px] flex-col px-2 pb-3 pt-1 sm:min-h-0 sm:px-1 sm:py-4 sm:pr-3">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-700 sm:text-[11px]">
-                    {role}
+                    {member.role}
                   </p>
 
-                  <h3 className="mt-3 text-[20px] font-medium leading-[1.05] tracking-[-0.04em] text-emerald-950 sm:text-[25px]">
-                    {name}
+                  <h3 className="mt-2 text-[20px] font-medium leading-[1.05] tracking-[-0.04em] text-emerald-950 sm:text-[24px]">
+                    {member.name}
                   </h3>
 
-                  <p className="mt-4 text-sm leading-6 text-slate-600">{bio}</p>
+                  <p className="mt-2.5 text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6">
+                    {member.bio}
+                  </p>
 
-                  <div className="my-5 h-px bg-emerald-950/8" />
+                  {/* Doctor Quote Box */}
+                  <div className="my-3.5 rounded-xl border border-emerald-900/10 bg-white/90 p-3 shadow-xs">
+                    <div className="flex items-start gap-2">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-800">
+                        <Quote className="h-2.5 w-2.5" />
+                      </span>
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-800">
+                          Doctor's Words
+                        </p>
+                        <p className="mt-0.5 text-[11px] italic leading-relaxed text-slate-700">
+                          "{member.quote}"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-                  <div className="flex items-start gap-2.5">
-                    <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
-                      <BadgeCheck className="h-3.5 w-3.5" />
+                  <div className="flex items-start gap-2">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700">
+                      <BadgeCheck className="h-3 w-3" />
                     </span>
 
-                    <p className="text-xs leading-5 text-slate-500">
-                      Personalised assessment and evidence-informed treatment
-                      planning.
+                    <p className="text-[11px] leading-4 text-slate-500">
+                      Personalised assessment and evidence-informed treatment planning.
                     </p>
                   </div>
 
                   <a
                     href="#contact"
-                    className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-emerald-900"
-                    aria-label={`View ${name}'s profile`}
+                    className="mt-auto inline-flex w-fit items-center gap-2 pt-4 text-xs font-semibold text-emerald-900 sm:text-sm"
+                    aria-label={`Book assessment with ${member.name}`}
                   >
                     <span className="relative">
-                      View profile
+                      Book assessment
 
                       <span className="absolute -bottom-1 left-0 h-px w-0 bg-emerald-800 transition-all duration-300 group-hover:w-full" />
                     </span>
 
-                    <span className="grid h-7 w-7 place-items-center rounded-full bg-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-emerald-950 group-hover:text-white">
-                      <ArrowRight className="h-3.5 w-3.5" />
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-emerald-950 group-hover:text-white sm:h-7 sm:w-7">
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     </span>
                   </a>
                 </div>

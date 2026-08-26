@@ -3,10 +3,12 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock3,
+  Instagram,
   Mail,
   MapPin,
   Phone,
   Sparkles,
+  Youtube,
 } from "lucide-react";
 import {
   AnimatePresence,
@@ -14,7 +16,7 @@ import {
   type Variants,
   useReducedMotion,
 } from "framer-motion";
-import { images, services } from "../../data/siteData";
+import { clinicInfo, images, services } from "../../data/siteData";
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
@@ -163,7 +165,7 @@ export function Contact() {
                     name="phone"
                     autoComplete="tel"
                     inputMode="tel"
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 93272 22529"
                     className={inputStyles}
                   />
                 </label>
@@ -280,21 +282,20 @@ export function Contact() {
             <div className="flex w-full flex-col">
               <div className="px-4 pb-7 pt-5 sm:px-6 sm:pt-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">
-                  Heritage Health
+                  {clinicInfo.name}
                 </p>
 
-                <h3 className="mt-2 text-2xl  tracking-[-0.035em] !text-white sm:text-[28px]">
+                <h3 className="mt-2 text-2xl tracking-[-0.035em] !text-white sm:text-[28px]">
                   Clinic Details
                 </h3>
 
                 <p className="mt-3 max-w-[390px] text-sm leading-6 text-white/60">
-                  Visit our physiotherapy clinic near Thaltej Metro Station in
-                  Ahmedabad.
+                  {clinicInfo.tagline} at Memnagar, Ahmedabad.
                 </p>
 
                 <div className="mt-7 space-y-3">
                   <a
-                    href="https://maps.google.com/?q=Thaltej+Metro+Station+Ahmedabad"
+                    href={clinicInfo.address.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
@@ -305,36 +306,41 @@ export function Contact() {
 
                     <span>
                       <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
-                        Address
+                        Address (Click for Google Maps)
                       </small>
 
                       <strong className="mt-1 block text-sm font-medium leading-5 text-white">
-                        Near Thaltej Metro Station, Ahmedabad
+                        {clinicInfo.address.full}
                       </strong>
                     </span>
                   </a>
 
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {clinicInfo.phones.map((phone, idx) => (
+                      <a
+                        key={phone.number}
+                        href={`tel:${phone.tel}`}
+                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                      >
+                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
+                          <Phone className="h-4.5 w-4.5" />
+                        </span>
+
+                        <span>
+                          <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
+                            {idx === 0 ? "Call us (Primary)" : "Call us"}
+                          </small>
+
+                          <strong className="mt-1 block text-sm font-medium text-white">
+                            {phone.number}
+                          </strong>
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+
                   <a
-                    href="tel:+919876543210"
-                    className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
-                  >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
-                      <Phone className="h-4.5 w-4.5" />
-                    </span>
-
-                    <span>
-                      <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
-                        Call us
-                      </small>
-
-                      <strong className="mt-1 block text-sm font-medium text-white">
-                        +91 98765 43210
-                      </strong>
-                    </span>
-                  </a>
-
-                  <a
-                    href="mailto:care@heritagehealth.in"
+                    href={`mailto:${clinicInfo.email}`}
                     className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
                   >
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
@@ -347,10 +353,12 @@ export function Contact() {
                       </small>
 
                       <strong className="mt-1 block truncate text-sm font-medium text-white">
-                        care@heritagehealth.in
+                        {clinicInfo.email}
                       </strong>
                     </span>
                   </a>
+
+
 
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5">
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
@@ -363,7 +371,7 @@ export function Contact() {
                       </small>
 
                       <strong className="mt-1 block text-sm font-medium text-white">
-                        Mon–Sat · 8:00 AM–8:00 PM
+                        {clinicInfo.hours}
                       </strong>
                     </span>
                   </div>

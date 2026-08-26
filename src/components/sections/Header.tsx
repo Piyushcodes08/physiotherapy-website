@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Activity, ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { navigation } from "../../data/siteData";
+import { images, navigation } from "../../data/siteData";
 
 type NavigationItem = (typeof navigation)[number];
 
@@ -45,13 +45,11 @@ export function Header({ onBook }: HeaderProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"
+        } ${scrolled
           ? "border-b border-slate-200/80 bg-white/90 shadow-[0_12px_35px_rgba(15,23,42,0.07)] backdrop-blur-xl"
           : "border-b border-transparent bg-white/75 backdrop-blur-md"
-      }`}
+        }`}
     >
       <div className="mx-auto flex h-19 max-w-292.5 items-center justify-between px-4 sm:px-6 lg:h-21 lg:px-8">
         {/* Brand */}
@@ -59,21 +57,13 @@ export function Header({ onBook }: HeaderProps) {
           href="#home"
           onClick={() => setOpen(false)}
           className="group flex shrink-0 items-center gap-3"
-          aria-label="Heritage Health home"
+          aria-label="Health Hunter home"
         >
-          <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl bg-emerald-950 text-white shadow-[0_10px_25px_rgba(6,78,59,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
-            <span className="absolute inset-0 bg-linear-to-br from-emerald-400/25 to-transparent" />
-            <Activity className="relative h-5 w-5" strokeWidth={2} />
-          </span>
-
-          <span className="leading-none">
-            <strong className="block text-[17px] font-semibold tracking-[-0.03em] text-emerald-950">
-              Heritage Health
-            </strong>
-            <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-800/65">
-              Physiotherapy Clinic
-            </small>
-          </span>
+          <img
+            src={images.logo}
+            alt="Health Hunter"
+            className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
         </a>
 
         {/* Desktop Navigation */}

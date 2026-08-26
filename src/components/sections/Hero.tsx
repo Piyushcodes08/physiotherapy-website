@@ -57,10 +57,10 @@ export function Hero({ onBook }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.08, ease }}
           >
-            <span className="block">Move Better</span>
-            <span className="block">Feel Stronger</span>
+            <span className="block">Health Hunter </span>
+            <span className="block">physiotherapy clinic and</span>
             <span className="relative mt-1 inline-block text-slate-950">
-              Live Pain-Free
+              wellness center
               <span className="absolute -bottom-2 left-1 h-1.25 w-full rounded-full bg-emerald-950" />
             </span>
           </motion.h1>

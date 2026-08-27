@@ -33,8 +33,8 @@ export const clinicInfo = {
 
 export const images = {
   logo: "/assets/health-henter-logo.svg",
-  hero: "/assets/654.png",
-  about: "/assets/physiotherapy_clinic_496x620.png",
+  hero: "/assets/hero.webp",
+  about: "/assets/about.webp",
   sarah: "https://lh3.googleusercontent.com/aida-public/AB6AXuA44xShHMuNWqkifddjdrHtsTd4O4-MpHVuuQ_KfbgkATvWCPnt1TwBQ0imAU6xOC5FO6K6REmn0HnSFO7dm0FUgLFyUi3dYvE_ti731Cgru-hvJIfYKuKB2Is0l3K9VYyRns5sggj4KV0-tP6GHCQDjXV-26lSlh0R8a4_Dz1wmoJGjK3d6yLiQo5isqvgziCfnTmmUvKZkGFiFni_sVZ2w8BD3NzU-GV6R1BC9aorjB8Rr_rGD_e1aw",
   michael: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOf0xGS1y8edg9fKpMZngQ2qwx1azEChMcdPWE3TLK6i2kw-R0PN90mYfjdAYYe-6ymPN491nqKULIeizXdqndloIL4PFzrGS8lFDpQ7rzsOkmD_OYTqujf46QQ1R1EAKP5yMBxHXNO-N1x06ViXcQa4fVOy-BSdRbIe7uXKauFepteRUK2UxZ85oqvlNuzP2WEHbshApsWfihwcqPpsBK1KMboRzxO8LRDZUJu6nRM4X47sZhqcpCFw",
   map: "https://lh3.googleusercontent.com/aida-public/AB6AXuClPgUuiJ-r-Uzm-yv3sKXz-5Bhl8nmwNg_ywQk8DX4gNaSRD0ydOVN5z4F07zAu3fkV-WwvjsPjqES51J7g2SQ28nXl05ZcPXldXXqpEih2Ui_LOimQQblUtbUYyL7COnzJnI6DhzfMwNxZkynAYUu1YDlkt2HQXibjP7f7H7QiOjRz_ZSBjWNU6AyTzhYJ0qguBeHmCRutHlLkST26b7K2cDmAGqEWIQXdNdraZ7YHuCbWz5EP3uHig",

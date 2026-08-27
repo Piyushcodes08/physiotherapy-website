@@ -31,7 +31,7 @@ export function Hero({ onBook }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#f7f8f4]/65 via-transparent to-transparent sm:hidden" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-292.5 items-center px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+      <div className="relative z-10 mx-auto flex w-full max-w-292.5 items-center gap-4 px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <motion.div
           className="w-full max-w-170 text-left"
           initial={false}

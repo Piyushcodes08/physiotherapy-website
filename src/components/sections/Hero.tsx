@@ -1,6 +1,6 @@
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { getWhatsAppBookingUrl, images } from "../../data/siteData";
+import { images } from "../../data/siteData";
 
 interface HeroProps {
   onBook?: () => void;
@@ -14,91 +14,91 @@ export function Hero({ onBook }: HeroProps) {
   return (
     <section
       id="home"
-      className="relative isolate flex h-svh items-center overflow-hidden bg-[#f7f8f4] pt-19 lg:pt-21"
+      className="relative isolate flex overflow-hidden"
+      style={{ minHeight: "100dvh" }}
     >
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <motion.img
-          src={images.hero}
+      {/* ── Full-bleed background image ── */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={images.heroBg}
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-[72%_center]"
-          initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease }}
+          className="h-full w-full object-cover object-right"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-[#f7f8f4]/95 via-[#f7f8f4]/78 via-65% to-transparent sm:hidden" />
-        <div className="absolute inset-0 hidden bg-linear-to-r from-[#f7f8f4]/95 via-transparent via-48% to-transparent sm:block" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#f7f8f4]/65 via-transparent to-transparent sm:hidden" />
+        {/* Mobile overlay: soft coverage for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f7f8f4]/95 via-[#f7f8f4]/88 to-[#f7f8f4]/60 sm:hidden" />
+        <div className="absolute inset-0 bg-[#f7f8f4]/30 sm:hidden" />
+
+        {/* Desktop overlay: smoothly covers left text area, 100% transparent on the right side */}
+        <div className="absolute inset-0 hidden sm:block bg-[linear-gradient(to_right,#f7f8f4_0%,#f7f8f4_30%,rgba(247,248,244,0.85)_40%,rgba(247,248,244,0.35)_48%,transparent_55%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-292.5 items-center gap-4 px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+      {/* ── Content layer ── */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1170px] flex-col justify-center px-5 pt-[100px] pb-10 sm:px-6 lg:min-h-[100dvh] lg:px-8 lg:pt-[80px]">
+
+        {/* Badge */}
         <motion.div
-          className="w-full max-w-170 text-left"
-          initial={false}
-          animate={{ opacity: 1 }}
+          className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-800/25 bg-white/90 px-3.5 py-1.5 shadow-sm backdrop-blur-sm"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease }}
         >
-          <motion.div
-            className="mb-6 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-white/80 px-3.5 py-1.5 shadow-xs backdrop-blur-md"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease }}
-          >
-            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
-              <Sparkles className="h-3 w-3" />
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-900 sm:text-xs">
-              Move well. Live well.
-            </span>
-          </motion.div>
+          <Sparkles className="h-3 w-3 text-emerald-700" />
+          <span className="font-poppins text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-900">
+            recover & revive your biological age.
+          </span>
+        </motion.div>
 
-          <motion.h1
-            className="font-montserrat text-[24px] sm:text-4xl md:text-5xl  font-semibold leading-[1.15] sm:leading-[0.92] tracking-[-0.04em] text-emerald-950"
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.08, ease }}
-          >
-            <span className="block">Health Hunter </span>
-            <span className="block">physiotherapy clinic and</span>
-            <span className="relative !mt-2.5 inline-block text-slate-950">
-              wellness center
-              <span className="absolute -bottom-2 left-1 h-1.25 w-full rounded-xs bg-emerald-950" />
-            </span>
-          </motion.h1>
+        {/* Heading */}
+        <motion.h1
+          className="mt-4 font-montserrat text-[28px] font-bold leading-[1.18] tracking-[-0.025em] text-emerald-950 sm:text-[36px] lg:mt-5 lg:text-[42px] xl:text-[50px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.08, ease }}
+        >
+          <span className="block">Health Hunter</span>
+          <span className="block">physiotherapy clinic and</span>
+          <span className="relative inline-block">
+            wellness center
+            <span className="absolute -bottom-0.5 left-0 h-[3px] w-full rounded-sm bg-emerald-950 lg:h-[3.5px]" />
+          </span>
+        </motion.h1>
 
-          <motion.p
-            className="mt-8 max-w-147.5 text-[15px] leading-7 !text-slate-800 sm:text-lg sm:leading-8"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.16, ease }}
-          >
+        {/* Description */}
+        <motion.div
+          className="mt-5 max-w-md lg:max-w-lg"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.16, ease }}
+        >
+          <p className="rounded-xl border border-emerald-900/10 bg-white/80 p-3.5 font-poppins text-[14px] font-medium leading-[1.75] text-slate-800 shadow-xs backdrop-blur-md sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none sm:text-[15px] sm:font-normal sm:text-slate-700">
             Professional, compassionate physiotherapy care in Ahmedabad,
             focused on restoring movement, easing pain and helping you return to
             what matters.
-          </motion.p>
+          </p>
+        </motion.div>
 
-          <motion.div
-            className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.24, ease }}
+        {/* CTA Buttons */}
+        <motion.div
+          className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.24, ease }}
+        >
+          <button
+            type="button"
+            onClick={onBook}
+            className="group inline-flex min-h-[50px] items-center justify-center gap-2.5 rounded-xl bg-emerald-950 px-7 py-3 font-poppins text-sm font-semibold text-white shadow-[0_10px_28px_rgba(6,78,59,0.22)] transition-all duration-300 hover:bg-emerald-800 hover:-translate-y-0.5 cursor-pointer"
           >
-            <button
-              type="button"
-              onClick={onBook}
-              className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-lg bg-emerald-950 px-6 py-3 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,78,59,0.18)] transition-all hover:bg-emerald-800 sm:px-7"
-            >
-              Book an assessment
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
-            <a
-              href="#services"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-300 bg-white/75 px-6 py-3 text-sm font-medium text-slate-800 backdrop-blur-md transition-colors hover:border-emerald-800 hover:bg-white sm:px-7"
-            >
-              Explore services
-            </a>
-          </motion.div>
-
-        
+            Book an assessment
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
+          <a
+            href="#services"
+            className="inline-flex min-h-[50px] items-center justify-center rounded-xl border border-slate-300 bg-white/90 px-7 py-3 font-poppins text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm transition-all hover:border-emerald-700 hover:bg-white hover:text-emerald-900"
+          >
+            Explore services
+          </a>
         </motion.div>
       </div>
     </section>

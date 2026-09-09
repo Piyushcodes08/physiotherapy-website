@@ -1,6 +1,8 @@
-import { Quote, Sparkles, Star } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from "lucide-react";
 import {
   motion,
+  AnimatePresence,
   type Variants,
   useReducedMotion,
 } from "framer-motion";
@@ -23,8 +25,155 @@ const fadeUp: Variants = {
   },
 };
 
+const slideVariants: Variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 60 : -60,
+    opacity: 0,
+    scale: 0.98,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      x: { type: "spring", stiffness: 320, damping: 32 },
+      opacity: { duration: 0.3 },
+      scale: { duration: 0.3 },
+    },
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 60 : -60,
+    opacity: 0,
+    scale: 0.98,
+    transition: {
+      x: { type: "spring", stiffness: 320, damping: 32 },
+      opacity: { duration: 0.25 },
+      scale: { duration: 0.25 },
+    },
+  }),
+};
+
+interface CardContentProps {
+  quote: string;
+  name: string;
+  department: string;
+  index: number;
+}
+
+function TestimonialCardBody({ quote, name, department, index }: CardContentProps) {
+  const initials = name
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <>
+      {/* Top section */}
+      <div className="relative flex items-start justify-between">
+        <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
+          <Quote className="h-4.5 w-4.5 fill-current" strokeWidth={1.5} />
+        </span>
+
+        <span className="text-[10px] font-semibold tracking-[0.16em] text-slate-300 transition-colors duration-300 group-hover:text-emerald-700/50">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* Rating */}
+      <div
+        className="relative mt-7 flex items-center gap-1"
+        aria-label="5 out of 5 stars"
+      >
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star
+            key={star}
+            className="h-4 w-4 fill-amber-400 text-amber-400"
+            strokeWidth={1.5}
+          />
+        ))}
+
+        <span className="ml-2 text-xs font-semibold text-slate-500">5.0</span>
+      </div>
+
+      {/* Quote */}
+      <blockquote className="relative mt-5 text-[16px] font-medium leading-7 tracking-[-0.01em] text-slate-700 sm:text-[17px]">
+        “{quote}”
+      </blockquote>
+
+      {/* Patient information */}
+      <figcaption className="relative mt-auto flex items-center gap-3 border-t border-emerald-950/8 pt-6">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-xs">
+          {initials}
+        </span>
+
+        <span className="min-w-0">
+          <strong className="block truncate text-sm font-semibold text-emerald-950">
+            {name}
+          </strong>
+
+          <small className="mt-1 block truncate text-xs font-medium text-slate-500">
+            {department}
+          </small>
+        </span>
+
+        <span className="ml-auto flex items-center gap-1.5 rounded-md bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-800">
+          <span className="h-1.5 w-1.5 rounded-xs bg-emerald-500" />
+          Verified
+        </span>
+      </figcaption>
+
+      {/* Bottom accent */}
+      <div className="absolute inset-x-7 bottom-0 h-[2px] origin-left scale-x-0 bg-emerald-800 transition-transform duration-500 group-hover:scale-x-100" />
+    </>
+  );
+}
+
 export function Testimonials() {
   const shouldReduceMotion = useReducedMotion();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect responsive screen (< 768px)
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % stories.length);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + stories.length) % stories.length);
+  }, []);
+
+  const handleDotClick = useCallback((index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  }, [currentIndex]);
+
+  // Auto slide on responsive only
+  useEffect(() => {
+    if (!isMobile || !isAutoPlaying || shouldReduceMotion) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [isMobile, isAutoPlaying, shouldReduceMotion, handleNext]);
 
   const containerVariants: Variants = {
     hidden: {},
@@ -35,6 +184,8 @@ export function Testimonials() {
       },
     },
   };
+
+  const currentStory = stories[currentIndex];
 
   return (
     <section
@@ -88,107 +239,158 @@ export function Testimonials() {
           </motion.p>
         </motion.div>
 
-        {/* Testimonial cards with minimal radius */}
+        {/* Desktop View: Grid Layout (md and up) */}
         <motion.div
-          className="mt-12 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 hidden gap-5 sm:mt-14 md:grid md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.12 }}
         >
-          {stories.map(([quote, name, department], index) => {
-            const initials = name
-              .split(" ")
-              .map((word) => word.charAt(0))
-              .join("")
-              .slice(0, 2)
-              .toUpperCase();
+          {stories.map(([quote, name, department], index) => (
+            <motion.figure
+              key={name}
+              variants={fadeUp}
+              className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.045)] transition-colors duration-300 hover:border-emerald-900/20 sm:p-7"
+              whileHover={
+                shouldReduceMotion
+                  ? undefined
+                  : {
+                      y: -4,
+                      transition: {
+                        duration: 0.3,
+                        ease: smoothEase,
+                      },
+                    }
+              }
+            >
+              {/* Hover background */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-50/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-            return (
-              <motion.figure
-                key={name}
-                variants={fadeUp}
-                className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.045)] transition-colors duration-300 hover:border-emerald-900/20 sm:p-7"
-                whileHover={
-                  shouldReduceMotion
-                    ? undefined
-                    : {
-                        y: -4,
-                        transition: {
-                          duration: 0.3,
-                          ease: smoothEase,
-                        },
-                      }
-                }
-              >
-                {/* Hover background */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-50/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <TestimonialCardBody
+                quote={quote}
+                name={name}
+                department={department}
+                index={index}
+              />
+            </motion.figure>
+          ))}
+        </motion.div>
 
-                {/* Top section */}
-                <div className="relative flex items-start justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
-                    <Quote
-                      className="h-4.5 w-4.5 fill-current"
-                      strokeWidth={1.5}
-                    />
-                  </span>
+        {/* Responsive / Mobile View: Testimonial Slider (< md) */}
+        <div className="mt-10 block md:hidden">
+          <div
+            className="relative"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+            onTouchStart={() => setIsAutoPlaying(false)}
+            onTouchEnd={() => setIsAutoPlaying(true)}
+          >
+            {/* Auto slide progress line */}
+            <div className="mb-4 h-0.5 w-full overflow-hidden rounded-full bg-emerald-950/10">
+              <motion.div
+                key={currentIndex}
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{
+                  duration: isAutoPlaying && !shouldReduceMotion ? 4.5 : 0,
+                  ease: "linear",
+                }}
+                className="h-full bg-emerald-700"
+              />
+            </div>
 
-                  <span className="text-[10px] font-semibold tracking-[0.16em] text-slate-300 transition-colors duration-300 group-hover:text-emerald-700/50">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                {/* Rating */}
-                <div
-                  className="relative mt-7 flex items-center gap-1"
-                  aria-label="5 out of 5 stars"
+            {/* Slider Card with Framer Motion and Touch Swipe */}
+            <div className="relative min-h-[360px] overflow-hidden rounded-xl">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.figure
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={(_, { offset, velocity }) => {
+                    const swipe = Math.abs(offset.x) * velocity.x;
+                    if (offset.x < -40 || swipe < -300) {
+                      handleNext();
+                    } else if (offset.x > 40 || swipe > 300) {
+                      handlePrev();
+                    }
+                  }}
+                  className="group relative flex min-h-[360px] w-full flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.06)] touch-pan-y"
                 >
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
-                      strokeWidth={1.5}
+                  <TestimonialCardBody
+                    quote={currentStory[0]}
+                    name={currentStory[1]}
+                    department={currentStory[2]}
+                    index={currentIndex}
+                  />
+                </motion.figure>
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation Controls */}
+            <div className="mt-6 flex items-center justify-between px-1">
+              {/* Previous Button */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              {/* Dots & Counter */}
+              <div className="flex flex-col items-center gap-1.5">
+                <div
+                  className="flex items-center gap-2"
+                  role="tablist"
+                  aria-label="Testimonial slides"
+                >
+                  {stories.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      role="tab"
+                      aria-selected={i === currentIndex}
+                      aria-label={`Go to slide ${i + 1}`}
+                      onClick={() => handleDotClick(i)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        i === currentIndex
+                          ? "w-7 bg-emerald-800"
+                          : "w-2 bg-emerald-950/20 hover:bg-emerald-950/40"
+                      }`}
                     />
                   ))}
-
-                  <span className="ml-2 text-xs font-semibold text-slate-500">
-                    5.0
-                  </span>
                 </div>
+                <span className="text-[11px] font-semibold tracking-wider text-slate-400">
+                  {String(currentIndex + 1).padStart(2, "0")} /{" "}
+                  {String(stories.length).padStart(2, "0")}
+                </span>
+              </div>
 
-                {/* Quote */}
-                <blockquote className="relative mt-5 text-[16px] font-medium leading-7 tracking-[-0.01em] text-slate-700 sm:text-[17px]">
-                  “{quote}”
-                </blockquote>
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
 
-                {/* Patient information */}
-                <figcaption className="relative mt-auto flex items-center gap-3 border-t border-emerald-950/8 pt-6">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-xs">
-                    {initials}
-                  </span>
-
-                  <span className="min-w-0">
-                    <strong className="block truncate text-sm font-semibold text-emerald-950">
-                      {name}
-                    </strong>
-
-                    <small className="mt-1 block truncate text-xs font-medium text-slate-500">
-                      {department}
-                    </small>
-                  </span>
-
-                  <span className="ml-auto flex items-center gap-1.5 rounded-md bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-800">
-                    <span className="h-1.5 w-1.5 rounded-xs bg-emerald-500" />
-                    Verified
-                  </span>
-                </figcaption>
-
-                {/* Bottom accent */}
-                <div className="absolute inset-x-7 bottom-0 h-[2px] origin-left scale-x-0 bg-emerald-800 transition-transform duration-500 group-hover:scale-x-100" />
-              </motion.figure>
-            );
-          })}
-        </motion.div>
+            {/* Subtle swipe hint for mobile users */}
+            <p className="mt-3 text-center text-[11px] font-medium text-slate-400">
+              Swipe or tap arrows to view more stories
+            </p>
+          </div>
+        </div>
 
         {/* Trust summary with minimal radius */}
         <motion.div

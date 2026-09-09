@@ -34,7 +34,10 @@ export const clinicInfo = {
 export const images = {
   logo: "/assets/health-henter-logo.svg",
   hero: "/assets/hero.webp",
-  about: "/assets/about.webp",
+  heroNew: "/assets/hero-new.jpg",
+  heroIndian: "/assets/hero-indian.jpg",
+  heroBg: "/assets/hero-hunter.png",
+  about: "/assets/hunter-about.png",
   serviceFitness: "/assets/service-fitness.jpg",
   serviceRelaxation: "/assets/service-relaxation.jpg",
   servicePhysio: "/assets/service-physio.jpg",

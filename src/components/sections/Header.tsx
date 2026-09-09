@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { images, navigation } from "../../data/siteData";
+import { clinicInfo, getWhatsAppBookingUrl, images, navigation } from "../../data/siteData";
 
 type NavigationItem = (typeof navigation)[number];
 
 interface HeaderProps {
-  onBook: () => void;
+  onBook?: () => void;
 }
 
 const getSectionId = (item: NavigationItem) =>
@@ -68,14 +68,14 @@ export function Header({ onBook }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center rounded-full border border-slate-200/80 bg-white/75 p-1.5 shadow-sm lg:flex"
+          className="hidden items-center rounded-lg border border-slate-200/80 bg-white/75 p-1 shadow-xs lg:flex"
           aria-label="Main navigation"
         >
           {navigation.map((item) => (
             <a
               key={item}
               href={`#${getSectionId(item)}`}
-              className="rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors duration-200 hover:bg-emerald-50 hover:text-emerald-950 xl:px-5"
+              className="rounded-md px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors duration-200 hover:bg-emerald-50 hover:text-emerald-950 xl:px-4.5"
             >
               {item}
             </a>
@@ -87,7 +87,7 @@ export function Header({ onBook }: HeaderProps) {
           <button
             type="button"
             onClick={onBook}
-            className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-emerald-950 px-5 text-sm font-medium text-white shadow-[0_10px_25px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-[0_14px_30px_rgba(4,120,87,0.22)]"
+            className="group inline-flex h-10.5 items-center justify-center gap-2 rounded-lg bg-emerald-950 px-4.5 text-sm font-medium text-white shadow-[0_10px_25px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-[0_14px_30px_rgba(4,120,87,0.22)]"
           >
             Book appointment
             <ArrowUpRight
@@ -101,7 +101,7 @@ export function Header({ onBook }: HeaderProps) {
         <button
           type="button"
           onClick={() => setOpen((current) => !current)}
-          className="grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-sm transition-colors hover:bg-slate-100 lg:hidden"
+          className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 bg-white text-slate-950 shadow-xs transition-colors hover:bg-slate-100 lg:hidden"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
         >
@@ -131,51 +131,52 @@ export function Header({ onBook }: HeaderProps) {
               type="button"
               aria-label="Close navigation"
               onClick={() => setOpen(false)}
-              className="fixed inset-0 top-19 -z-10 bg-slate-950/20 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 top-[74px] z-40 bg-slate-950/25 backdrop-blur-xs lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
 
-            <motion.nav
-              className="absolute left-4 right-4 top-21 overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-[0_24px_60px_rgba(15,23,42,0.16)] sm:left-6 sm:right-6 lg:hidden"
+            <motion.div
+              role="dialog"
               aria-label="Mobile navigation"
-              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              className="absolute left-4 right-4 top-[78px] z-50 overflow-hidden rounded-xl border border-slate-200 bg-white p-3.5 shadow-[0_20px_50px_rgba(15,23,42,0.18)] sm:left-6 sm:right-6 lg:hidden"
+              initial={{ opacity: 0, y: -10, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex flex-col">
+              <nav className="flex flex-col gap-1">
                 {navigation.map((item, index) => (
                   <motion.a
                     key={item}
                     href={`#${getSectionId(item)}`}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-950"
+                    className="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-950"
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.035 }}
+                    transition={{ delay: index * 0.03 }}
                   >
-                    {item}
+                    <span>{item}</span>
                     <ArrowUpRight className="h-4 w-4 text-slate-400" />
                   </motion.a>
                 ))}
-              </div>
+              </nav>
 
-              <div className="my-2 h-px bg-slate-100" />
+              <div className="my-2.5 h-px bg-slate-100" />
 
               <button
                 type="button"
                 onClick={() => {
                   setOpen(false);
-                  onBook();
+                  if (onBook) onBook();
                 }}
-                className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-950 px-5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+                className="flex w-full h-11 items-center justify-center gap-2 rounded-lg bg-emerald-950 px-5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-emerald-800 cursor-pointer"
               >
-                Book appointment
+                <span>Book appointment</span>
                 <ArrowUpRight className="h-4 w-4" />
               </button>
-            </motion.nav>
+            </motion.div>
           </>
         )}
       </AnimatePresence>

@@ -6,6 +6,7 @@ import {
   Instagram,
   Mail,
   MapPin,
+  MessageCircle,
   Phone,
   Sparkles,
   Youtube,
@@ -16,7 +17,7 @@ import {
   type Variants,
   useReducedMotion,
 } from "framer-motion";
-import { clinicInfo, images, services } from "../../data/siteData";
+import { clinicInfo, getWhatsAppBookingUrl, images, services } from "../../data/siteData";
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
@@ -36,7 +37,7 @@ const fadeUp: Variants = {
 };
 
 const inputStyles =
-  "mt-2 h-13 w-full rounded-xl border border-slate-200 bg-[#f8faf8] px-4 text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10";
+  "mt-2 h-12 w-full rounded-lg border border-slate-200 bg-[#f8faf8] px-4 text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
@@ -75,10 +76,10 @@ export function Contact() {
         >
           <motion.div
             variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50/80 px-3.5 py-2 shadow-sm sm:mb-6 sm:px-4"
+            className="mb-5 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-emerald-50/80 px-3 py-1.5 shadow-xs sm:mb-6 sm:px-3.5"
           >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-100 text-emerald-700">
-              <Sparkles className="h-3.5 w-3.5" />
+            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
+              <Sparkles className="h-3 w-3" />
             </span>
 
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-900 sm:text-xs">
@@ -88,7 +89,7 @@ export function Contact() {
 
           <motion.h2
             variants={fadeUp}
-            className="font-sans text-[clamp(2.6rem,5vw,4.75rem)]  leading-[0.98] tracking-[-0.05em] text-emerald-950"
+            className="font-montserrat text-[24px] sm:text-3xl lg:text-4xl font-semibold leading-snug tracking-[-0.03em] text-emerald-950"
           >
             Start Your Recovery Journey
           </motion.h2>
@@ -106,7 +107,7 @@ export function Contact() {
         <div className="mt-12 grid items-stretch gap-6 sm:mt-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-7">
           {/* Appointment form */}
           <motion.div
-            className="rounded-[2rem] border border-emerald-950/8 bg-white p-5 shadow-[0_20px_60px_rgba(15,23,42,0.07)] sm:p-7 lg:p-8"
+            className="rounded-xl border border-emerald-950/8 bg-white p-5 shadow-[0_16px_50px_rgba(15,23,42,0.06)] sm:p-7 lg:p-8"
             initial={{
               opacity: 0,
               x: shouldReduceMotion ? 0 : -30,
@@ -127,12 +128,12 @@ export function Contact() {
                   Appointment form
                 </p>
 
-                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-emerald-950 sm:text-[28px]">
+                <h3 className="mt-2 font-montserrat text-2xl font-semibold tracking-[-0.035em] text-emerald-950 sm:text-[28px]">
                   Tell us how we can help
                 </h3>
               </div>
 
-              <span className="hidden rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-semibold text-emerald-800 sm:block">
+              <span className="hidden rounded-md bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-800 sm:block">
                 Usually replies quickly
               </span>
             </div>
@@ -140,8 +141,18 @@ export function Contact() {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
+                const formData = new FormData(event.currentTarget);
+                const name = formData.get("name")?.toString() || "";
+                const phone = formData.get("phone")?.toString() || "";
+                const service = formData.get("service")?.toString() || "";
+                const message = formData.get("message")?.toString() || "";
+                const template = `Hello Health Hunter Clinic,\n\nI would like to book a physiotherapy appointment.\n\nName: ${name}\nPhone: ${phone}\nService: ${service || "General Physiotherapy"}\nMessage: ${message || "Please share available consultation slots."}`;
                 setSent(true);
-                event.currentTarget.reset();
+                window.open(
+                  `https://wa.me/${clinicInfo.whatsappNumber}?text=${encodeURIComponent(template)}`,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
               }}
             >
               <div className="grid gap-5 sm:grid-cols-2">
@@ -165,7 +176,7 @@ export function Contact() {
                     name="phone"
                     autoComplete="tel"
                     inputMode="tel"
-                    placeholder="+91 93272 22529"
+                    placeholder="+91 63536 27860"
                     className={inputStyles}
                   />
                 </label>
@@ -196,7 +207,7 @@ export function Contact() {
                     name="message"
                     rows={4}
                     placeholder="Tell us briefly about your pain, injury or concern"
-                    className="mt-2 w-full resize-none rounded-xl border border-slate-200 bg-[#f8faf8] px-4 py-3.5 text-sm leading-6 text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-4 focus:ring-emerald-700/10"
+                    className="mt-2 w-full resize-none rounded-lg border border-slate-200 bg-[#f8faf8] px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10"
                   />
                 </label>
               </div>
@@ -204,20 +215,26 @@ export function Contact() {
               <div className="mt-6 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                 <motion.button
                   type="submit"
-                  className="group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-emerald-950 px-7 py-3.5 text-sm font-normal text-white shadow-[0_14px_30px_rgba(6,78,59,0.18)] transition-colors duration-300 hover:bg-emerald-800"
-                  whileHover={shouldReduceMotion ? undefined : { y: -3 }}
+                  className="group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-lg bg-emerald-950 px-6 py-3 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,78,59,0.18)] transition-colors duration-300 hover:bg-emerald-800"
+                  whileHover={shouldReduceMotion ? undefined : { y: -2 }}
                   whileTap={
                     shouldReduceMotion ? undefined : { scale: 0.98 }
                   }
                 >
-                  Send appointment request
+                  <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                  <span>Send via WhatsApp</span>
 
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </motion.button>
 
-                <p className="text-center text-xs leading-5 text-slate-500 sm:text-left">
-                  Your information remains private and secure.
-                </p>
+                <a
+                  href={getWhatsAppBookingUrl("Hello Health Hunter Clinic, I would like to book a physiotherapy appointment.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition-colors hover:border-emerald-600 hover:text-emerald-900"
+                >
+                  Direct chat: +91 63536 27860
+                </a>
               </div>
 
               <AnimatePresence>
@@ -225,7 +242,7 @@ export function Contact() {
                   <motion.div
                     role="status"
                     aria-live="polite"
-                    className="mt-5 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900"
+                    className="mt-5 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-900"
                     initial={{
                       opacity: 0,
                       y: shouldReduceMotion ? 0 : -8,
@@ -263,7 +280,7 @@ export function Contact() {
 
           {/* Clinic information */}
           <motion.aside
-            className="flex overflow-hidden rounded-[2rem] bg-emerald-950 p-3 text-white shadow-[0_24px_60px_rgba(6,78,59,0.18)]"
+            className="flex overflow-hidden rounded-xl bg-emerald-950 p-3 text-white shadow-[0_20px_50px_rgba(6,78,59,0.18)]"
             initial={{
               opacity: 0,
               x: shouldReduceMotion ? 0 : 30,
@@ -285,7 +302,7 @@ export function Contact() {
                   {clinicInfo.name}
                 </p>
 
-                <h3 className="mt-2 text-2xl tracking-[-0.035em] !text-white sm:text-[28px]">
+                <h3 className="mt-2 font-montserrat text-2xl font-semibold tracking-[-0.035em] !text-white sm:text-[28px]">
                   Clinic Details
                 </h3>
 
@@ -298,9 +315,9 @@ export function Contact() {
                     href={clinicInfo.address.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                    className="group flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
                   >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
                       <MapPin className="h-4.5 w-4.5" />
                     </span>
 
@@ -320,9 +337,9 @@ export function Contact() {
                       <a
                         key={phone.number}
                         href={`tel:${phone.tel}`}
-                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                        className="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
                       >
-                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
+                        <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
                           <Phone className="h-4.5 w-4.5" />
                         </span>
 
@@ -341,9 +358,9 @@ export function Contact() {
 
                   <a
                     href={`mailto:${clinicInfo.email}`}
-                    className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                    className="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
                   >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
                       <Mail className="h-4.5 w-4.5" />
                     </span>
 
@@ -358,10 +375,8 @@ export function Contact() {
                     </span>
                   </a>
 
-
-
-                  <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
+                  <div className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
                       <Clock3 className="h-4.5 w-4.5" />
                     </span>
 

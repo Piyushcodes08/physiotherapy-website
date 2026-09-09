@@ -1,9 +1,9 @@
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { images } from "../../data/siteData";
+import { getWhatsAppBookingUrl, images } from "../../data/siteData";
 
 interface HeroProps {
-  onBook: () => void;
+  onBook?: () => void;
 }
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -38,13 +38,13 @@ export function Hero({ onBook }: HeroProps) {
           animate={{ opacity: 1 }}
         >
           <motion.div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-md"
+            className="mb-6 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-white/80 px-3.5 py-1.5 shadow-xs backdrop-blur-md"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-100 text-emerald-700">
-              <Sparkles className="h-3.5 w-3.5" />
+            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
+              <Sparkles className="h-3 w-3" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-900 sm:text-xs">
               Move well. Live well.
@@ -52,16 +52,16 @@ export function Hero({ onBook }: HeroProps) {
           </motion.div>
 
           <motion.h1
-            className="font-sans text-[clamp(2rem,4vw,5rem)]! font-semibold leading-[0.92] tracking-[-0.055em] text-emerald-950"
+            className="font-montserrat text-[24px] sm:text-4xl md:text-5xl  font-semibold leading-[1.15] sm:leading-[0.92] tracking-[-0.04em] text-emerald-950"
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.08, ease }}
           >
             <span className="block">Health Hunter </span>
             <span className="block">physiotherapy clinic and</span>
-            <span className="relative mt-1 inline-block text-slate-950">
+            <span className="relative !mt-2.5 inline-block text-slate-950">
               wellness center
-              <span className="absolute -bottom-2 left-1 h-1.25 w-full rounded-full bg-emerald-950" />
+              <span className="absolute -bottom-2 left-1 h-1.25 w-full rounded-xs bg-emerald-950" />
             </span>
           </motion.h1>
 
@@ -85,14 +85,14 @@ export function Hero({ onBook }: HeroProps) {
             <button
               type="button"
               onClick={onBook}
-              className="group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-emerald-950 px-6 py-3.5 text-sm font-medium text-white shadow-[0_14px_30px_rgba(6,78,59,0.18)] transition-colors hover:bg-emerald-800 sm:px-7"
+              className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-lg bg-emerald-950 px-6 py-3 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,78,59,0.18)] transition-all hover:bg-emerald-800 sm:px-7"
             >
               Book an assessment
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <a
               href="#services"
-              className="inline-flex min-h-13 items-center justify-center rounded-full border border-slate-300 bg-white/75 px-6 py-3.5 text-sm font-medium text-slate-800 backdrop-blur-md transition-colors hover:border-emerald-800 hover:bg-white sm:px-7"
+              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-300 bg-white/75 px-6 py-3 text-sm font-medium text-slate-800 backdrop-blur-md transition-colors hover:border-emerald-800 hover:bg-white sm:px-7"
             >
               Explore services
             </a>

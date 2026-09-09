@@ -61,10 +61,10 @@ export function Testimonials() {
         >
           <motion.div
             variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 px-3.5 py-2 shadow-sm backdrop-blur-md sm:mb-6 sm:px-4"
+            className="mb-5 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-white/80 px-3 py-1.5 shadow-xs backdrop-blur-md sm:mb-6 sm:px-3.5"
           >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-100 text-emerald-700">
-              <Sparkles className="h-3.5 w-3.5" />
+            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
+              <Sparkles className="h-3 w-3" />
             </span>
 
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-900 sm:text-xs">
@@ -74,7 +74,7 @@ export function Testimonials() {
 
           <motion.h2
             variants={fadeUp}
-            className="font-sans text-[clamp(2.6rem,5vw,4.75rem)]  leading-[0.98] tracking-[-0.05em] text-emerald-950"
+            className="font-montserrat text-[24px] sm:text-3xl lg:text-4xl font-semibold leading-snug tracking-[-0.03em] text-emerald-950"
           >
             Recovery Stories That Inspire
           </motion.h2>
@@ -88,7 +88,7 @@ export function Testimonials() {
           </motion.p>
         </motion.div>
 
-        {/* Testimonial cards */}
+        {/* Testimonial cards with minimal radius */}
         <motion.div
           className="mt-12 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
@@ -108,12 +108,12 @@ export function Testimonials() {
               <motion.figure
                 key={name}
                 variants={fadeUp}
-                className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-[1.75rem] border border-emerald-950/8 bg-white p-6 shadow-[0_14px_40px_rgba(15,23,42,0.055)] transition-colors duration-300 hover:border-emerald-900/15 sm:p-7"
+                className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.045)] transition-colors duration-300 hover:border-emerald-900/20 sm:p-7"
                 whileHover={
                   shouldReduceMotion
                     ? undefined
                     : {
-                        y: -7,
+                        y: -4,
                         transition: {
                           duration: 0.3,
                           ease: smoothEase,
@@ -126,9 +126,9 @@ export function Testimonials() {
 
                 {/* Top section */}
                 <div className="relative flex items-start justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
+                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
                     <Quote
-                      className="h-5 w-5 fill-current"
+                      className="h-4.5 w-4.5 fill-current"
                       strokeWidth={1.5}
                     />
                   </span>
@@ -163,7 +163,7 @@ export function Testimonials() {
 
                 {/* Patient information */}
                 <figcaption className="relative mt-auto flex items-center gap-3 border-t border-emerald-950/8 pt-6">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-sm">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-xs">
                     {initials}
                   </span>
 
@@ -177,22 +177,22 @@ export function Testimonials() {
                     </small>
                   </span>
 
-                  <span className="ml-auto flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1.5 text-[10px] font-semibold text-emerald-800">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="ml-auto flex items-center gap-1.5 rounded-md bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-800">
+                    <span className="h-1.5 w-1.5 rounded-xs bg-emerald-500" />
                     Verified
                   </span>
                 </figcaption>
 
                 {/* Bottom accent */}
-                <div className="absolute inset-x-7 bottom-0 h-[3px] origin-left scale-x-0 rounded-full bg-emerald-800 transition-transform duration-500 group-hover:scale-x-100" />
+                <div className="absolute inset-x-7 bottom-0 h-[2px] origin-left scale-x-0 bg-emerald-800 transition-transform duration-500 group-hover:scale-x-100" />
               </motion.figure>
             );
           })}
         </motion.div>
 
-        {/* Trust summary */}
+        {/* Trust summary with minimal radius */}
         <motion.div
-          className="mt-10 grid overflow-hidden rounded-[1.75rem] border border-emerald-900/10 bg-emerald-950 text-white shadow-[0_18px_45px_rgba(6,78,59,0.15)] sm:grid-cols-3"
+          className="mt-10 grid overflow-hidden rounded-xl border border-emerald-900/10 bg-emerald-950 text-white shadow-[0_16px_40px_rgba(6,78,59,0.15)] sm:grid-cols-3"
           initial={{
             opacity: 0,
             y: shouldReduceMotion ? 0 : 20,

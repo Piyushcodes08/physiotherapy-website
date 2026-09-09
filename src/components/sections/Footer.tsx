@@ -8,7 +8,7 @@ import {
   Youtube,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { clinicInfo, images } from "../../data/siteData";
+import { clinicInfo, getWhatsAppBookingUrl, images } from "../../data/siteData";
 import { LogoFull } from "../Logo";
 
 const quickLinks = [
@@ -21,15 +21,18 @@ const quickLinks = [
 ] as const;
 
 const servicesLinks = [
-  "Pain management",
-  "Sports rehabilitation",
-  "Post-surgery recovery",
-  "Mobility therapy",
+  "Age-reversing fitness",
+  "Relaxation therapy",
+  "Complimentary physiotherapy",
 ] as const;
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
-export function Footer() {
+interface FooterProps {
+  onBook?: () => void;
+}
+
+export function Footer({ onBook }: FooterProps) {
   const shouldReduceMotion = useReducedMotion();
   const currentYear = new Date().getFullYear();
 
@@ -52,21 +55,22 @@ export function Footer() {
               Begin your recovery
             </p>
 
-            <h2 className="mt-2 text-2xl font-medium tracking-[-0.035em] !text-white sm:text-3xl">
+            <h2 className="mt-2 font-montserrat text-[24px] font-semibold tracking-[-0.035em] !text-white sm:text-3xl">
               Ready to move and feel better?
             </h2>
           </div>
 
-          <motion.a
-            href="#contact"
-            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors duration-300 hover:bg-emerald-100"
+          <motion.button
+            type="button"
+            onClick={onBook}
+            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors duration-300 hover:bg-emerald-100"
             whileHover={shouldReduceMotion ? undefined : { y: -3 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
           >
             Book an appointment
 
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
+          </motion.button>
         </div>
       </div>
 
@@ -91,7 +95,7 @@ export function Footer() {
             restoring movement, reducing pain and supporting long-term recovery.
           </p>
 
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2">
+          <div className="mt-6 inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.1)]" />
 
             <span className="text-xs font-medium text-white/70">
@@ -102,7 +106,7 @@ export function Footer() {
 
         {/* Quick links */}
         <div>
-          <h3 className="text-sm font-semibold text-white">Quick links</h3>
+          <h3 className="font-montserrat text-sm font-semibold text-white">Quick links</h3>
 
           <div className="mt-5 flex flex-col items-start gap-3.5">
             {quickLinks.map(([label, href]) => (
@@ -121,7 +125,7 @@ export function Footer() {
 
         {/* Contact information */}
         <div>
-          <h3 className="text-sm font-semibold text-white">Contact</h3>
+          <h3 className="font-montserrat text-sm font-semibold text-white">Contact</h3>
 
           <div className="mt-5 space-y-3.5">
             {clinicInfo.phones.map((phone) => (
@@ -227,13 +231,13 @@ export function Footer() {
 
         {/* Map */}
         <div>
-          <h3 className="text-sm font-semibold text-white">Find our clinic</h3>
+          <h3 className="font-montserrat text-sm font-semibold text-white">Find our clinic</h3>
 
           <a
             href={clinicInfo.address.mapsUrl}
             target="_blank"
             rel="noreferrer"
-            className="group relative mt-5 block h-[220px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-emerald-900 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
+            className="group relative mt-5 block h-[220px] overflow-hidden rounded-xl border border-white/10 bg-emerald-900 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
             aria-label="View Health Hunter clinic on Google Maps"
           >
             <motion.img
@@ -260,7 +264,7 @@ export function Footer() {
               <MapPin className="h-4.5 w-4.5" fill="currentColor" />
             </span>
 
-            <span className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-emerald-950/80 px-3.5 py-3 backdrop-blur-md">
+            <span className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-lg border border-white/15 bg-emerald-950/80 px-3.5 py-3 backdrop-blur-md">
               <span className="min-w-0">
                 <strong className="block truncate text-xs font-semibold text-white">
                   309, Gala Empire, Memnagar

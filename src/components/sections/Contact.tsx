@@ -37,7 +37,7 @@ const fadeUp: Variants = {
 };
 
 const inputStyles =
-  "mt-2 h-12 w-full rounded-lg border border-slate-200 bg-[#f8faf8] px-4 text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10";
+  "mt-2 h-12 w-full rounded-xl border border-slate-200 bg-[#f8faf8] px-4 text-sm text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
@@ -56,7 +56,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+      className="relative isolate overflow-hidden bg-white py-10 sm:py-14 lg:py-16"
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -76,9 +76,9 @@ export function Contact() {
         >
           <motion.div
             variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-emerald-50/80 px-3 py-1.5 shadow-xs sm:mb-6 sm:px-3.5"
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-emerald-50/80 px-3.5 py-1.5 shadow-xs sm:mb-6"
           >
-            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-100 text-emerald-700">
               <Sparkles className="h-3 w-3" />
             </span>
 
@@ -107,7 +107,7 @@ export function Contact() {
         <div className="mt-12 grid items-stretch gap-6 sm:mt-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-7">
           {/* Appointment form */}
           <motion.div
-            className="rounded-xl border border-emerald-950/8 bg-white p-5 shadow-[0_16px_50px_rgba(15,23,42,0.06)] sm:p-7 lg:p-8"
+            className="rounded-3xl border border-emerald-950/8 bg-white p-5 shadow-[0_16px_50px_rgba(15,23,42,0.06)] sm:p-7 lg:p-8"
             initial={{
               opacity: 0,
               x: shouldReduceMotion ? 0 : -30,
@@ -122,7 +122,7 @@ export function Contact() {
               ease: smoothEase,
             }}
           >
-            <div className="mb-7 flex items-center justify-between gap-4 border-b border-slate-100 pb-6">
+            <div className="mb-7 flex flex-col items-center text-center sm:flex-row sm:items-center sm:justify-between sm:text-left gap-4 border-b border-slate-100 pb-6">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-700">
                   Appointment form
@@ -133,7 +133,7 @@ export function Contact() {
                 </h3>
               </div>
 
-              <span className="hidden rounded-md bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-800 sm:block">
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-semibold text-emerald-800">
                 Usually replies quickly
               </span>
             </div>
@@ -207,7 +207,7 @@ export function Contact() {
                     name="message"
                     rows={4}
                     placeholder="Tell us briefly about your pain, injury or concern"
-                    className="mt-2 w-full resize-none rounded-lg border border-slate-200 bg-[#f8faf8] px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10"
+                    className="mt-2 w-full resize-none rounded-xl border border-slate-200 bg-[#f8faf8] px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-700 focus:bg-white focus:ring-3 focus:ring-emerald-700/10"
                   />
                 </label>
               </div>
@@ -215,7 +215,7 @@ export function Contact() {
               <div className="mt-6 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                 <motion.button
                   type="submit"
-                  className="group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-lg bg-emerald-950 px-6 py-3 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,78,59,0.18)] transition-colors duration-300 hover:bg-emerald-800"
+                  className="group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-full bg-emerald-950 px-7 py-3 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,78,59,0.18)] transition-colors duration-300 hover:bg-emerald-800 cursor-pointer"
                   whileHover={shouldReduceMotion ? undefined : { y: -2 }}
                   whileTap={
                     shouldReduceMotion ? undefined : { scale: 0.98 }
@@ -231,7 +231,7 @@ export function Contact() {
                   href={getWhatsAppBookingUrl("Hello Health Hunter Clinic, I would like to book a physiotherapy appointment.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition-colors hover:border-emerald-600 hover:text-emerald-900"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-700 transition-colors hover:border-emerald-600 hover:text-emerald-900 cursor-pointer"
                 >
                   Direct chat: +91 63536 27860
                 </a>
@@ -242,7 +242,7 @@ export function Contact() {
                   <motion.div
                     role="status"
                     aria-live="polite"
-                    className="mt-5 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-900"
+                    className="mt-5 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900"
                     initial={{
                       opacity: 0,
                       y: shouldReduceMotion ? 0 : -8,
@@ -280,7 +280,7 @@ export function Contact() {
 
           {/* Clinic information */}
           <motion.aside
-            className="flex overflow-hidden rounded-xl bg-emerald-950 p-3 text-white shadow-[0_20px_50px_rgba(6,78,59,0.18)]"
+            className="flex overflow-hidden rounded-3xl bg-emerald-950 p-3 text-white shadow-[0_20px_50px_rgba(6,78,59,0.18)]"
             initial={{
               opacity: 0,
               x: shouldReduceMotion ? 0 : 30,
@@ -297,7 +297,7 @@ export function Contact() {
             }}
           >
             <div className="flex w-full flex-col">
-              <div className="px-4 pb-7 pt-5 sm:px-6 sm:pt-6">
+              <div className="px-4 pb-7 pt-5 sm:px-6 sm:pt-6 text-center">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">
                   {clinicInfo.name}
                 </p>
@@ -306,7 +306,7 @@ export function Contact() {
                   Clinic Details
                 </h3>
 
-                <p className="mt-3 max-w-[390px] text-sm leading-6 text-white/60">
+                <p className="mt-3 max-w-[390px] text-sm leading-6 text-white/60 mx-auto sm:mx-0">
                   {clinicInfo.tagline} at Memnagar, Ahmedabad.
                 </p>
 
@@ -315,13 +315,13 @@ export function Contact() {
                     href={clinicInfo.address.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                    className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10 sm:flex-row sm:items-start sm:gap-3"
                   >
-                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
                       <MapPin className="h-4.5 w-4.5" />
                     </span>
 
-                    <span>
+                    <span className="text-center sm:text-left">
                       <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
                         Address (Click for Google Maps)
                       </small>
@@ -337,15 +337,15 @@ export function Contact() {
                       <a
                         key={phone.number}
                         href={`tel:${phone.tel}`}
-                        className="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                        className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10 sm:flex-row sm:items-center sm:gap-3"
                       >
-                        <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
+                        <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
                           <Phone className="h-4.5 w-4.5" />
                         </span>
 
-                        <span>
+                        <span className="text-center sm:text-left">
                           <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
-                            {idx === 0 ? "Call us (Primary)" : "Call us"}
+                            {idx === 0 ? "Call us" : "Call us"}
                           </small>
 
                           <strong className="mt-1 block text-sm font-medium text-white">
@@ -358,13 +358,13 @@ export function Contact() {
 
                   <a
                     href={`mailto:${clinicInfo.email}`}
-                    className="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10"
+                    className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-colors duration-300 hover:bg-white/10 sm:flex-row sm:items-center sm:gap-3"
                   >
-                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
                       <Mail className="h-4.5 w-4.5" />
                     </span>
 
-                    <span className="min-w-0">
+                    <span className="min-w-0 text-center sm:text-left">
                       <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
                         Email
                       </small>
@@ -375,12 +375,12 @@ export function Contact() {
                     </span>
                   </a>
 
-                  <div className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3.5">
-                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-md bg-white/10 text-emerald-300">
+                  <div className="flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-3.5 sm:flex-row sm:items-center sm:gap-3">
+                    <span className="grid h-9.5 w-9.5 shrink-0 place-items-center rounded-xl bg-white/10 text-emerald-300">
                       <Clock3 className="h-4.5 w-4.5" />
                     </span>
 
-                    <span>
+                    <span className="text-center sm:text-left">
                       <small className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/40">
                         Clinic hours
                       </small>

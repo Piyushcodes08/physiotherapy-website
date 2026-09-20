@@ -37,7 +37,7 @@ export const images = {
   heroNew: "/assets/hero-new.jpg",
   heroIndian: "/assets/hero-indian.jpg",
   heroBg: "/assets/hero-hunter.png",
-  about: "/assets/hunter-about.png",
+  about: "/assets/about.webp",
   serviceFitness: "/assets/service-fitness.jpg",
   serviceRelaxation: "/assets/service-relaxation.jpg",
   servicePhysio: "/assets/service-physio.jpg",
@@ -48,15 +48,15 @@ export const images = {
 
 export const team = [
   {
-    photo: images.sarah,
-    name: "Dr. Sarah Jenkins",
+    photo: "/assets/doctor-male.jpg",
+    name: "Dr. Arjun Mehta",
     role: "Senior Physiotherapist",
     bio: "Orthopaedic rehabilitation & pain management",
     quote: "True healing begins when we understand the root cause and empower you with the confidence to move freely again.",
   },
   {
-    photo: images.michael,
-    name: "Dr. Michael D’souza",
+    photo: "/assets/doctor-female.jpg",
+    name: "Dr. Priya Sharma",
     role: "Sports Physiotherapist",
     bio: "Sports injury, mobility & performance recovery",
     quote: "Rehabilitation isn't just about recovering from an injury—it's about building a stronger, more resilient body.",
@@ -78,6 +78,96 @@ export const membershipPillars = [
   },
 ] as const;
 
+export const coreServices = [
+  {
+    id: "manual-therapy",
+    title: "Manual Therapy",
+    badge: "SERVICES",
+    headline: "MANUAL THERAPY",
+    banner: "/assets/manual therapy.webp",
+    fullImage: "/assets/manual therapy.webp",
+    accentColor: "#16a578",
+    features: [
+      {
+        num: "01",
+        title: "MYOFASCIAL RELEASE TECHNIQUES",
+        description:
+          "Relaxes and enhances tissue quality by restoring optimal muscle and fascial tone and tensile quality by deep tissue release instantly reducing pain .",
+      },
+      {
+        num: "02",
+        title: "JOINT MOBILISATION AND MANIPULATION",
+        description:
+          "Restores joint mobility and maintains joint health by lubrication of joint and acquires full range joint strength by correction fascia and joint alignment.",
+      },
+      {
+        num: "03",
+        title: "PAIN REDUCTION",
+        description:
+          "Spontaneous reduction of pain achieved due to treatment of problem from the root cause ensuring permanent relief of pain.",
+      },
+    ],
+  },
+  {
+    id: "chiropractic-therapy",
+    title: "Chiropractic Therapy",
+    badge: "SERVICES",
+    headline: "CHIROPRACTIC THERAPY",
+    banner: "/assets/chiropractice therapy.webp",
+    fullImage: "/assets/chiropractice therapy.webp",
+    accentColor: "#16a578",
+    features: [
+      {
+        num: "01",
+        title: "JOINT MANIPULATION AND THRUST",
+        description:
+          "Highly Specialized spinal thrust techniques which focuses on fixing spinal mal-alignments",
+      },
+      {
+        num: "02",
+        title: "POSTURE CORRECTION",
+        description:
+          "Improves bad postural alignments and corrects overall postural faults of various joints and spinal facets.",
+      },
+      {
+        num: "03",
+        title: "PAIN RELIEF",
+        description:
+          "Modulates spinal nerves to release endogenous endorphins and stops pain signals to the brain inducing relaxation through the body",
+      },
+    ],
+  },
+  {
+    id: "chinese-cupping-therapy",
+    title: "Chinese Cupping Therapy",
+    badge: "SERVICES",
+    headline: "CHINESE CUPPING THERAPY",
+    banner: "/assets/cupping therapy.webp",
+    fullImage: "/assets/cupping therapy.webp",
+    accentColor: "#16a578",
+    features: [
+      {
+        num: "01",
+        title: "BLOOD FLOW RESTORATION",
+        description:
+          "Tightened tissue structures of fascia and muscles are relaxed which restore smooth blood flow to the treated areas.",
+      },
+      {
+        num: "02",
+        title: "DETOXIFICATION",
+        description:
+          "Toxic metabolites and excess inflammatory debris are cleared from the affected area which detoxes blood and relieves pain and swelling and heals faster.",
+      },
+      {
+        num: "03",
+        title: "PAIN REDUCTION AND RELAXATION.",
+        description:
+          "Reduction from pain by endorphin release and mechano-receptors stimulus causes central nervous relaxation.",
+      },
+    ],
+  },
+] as const;
+
 export const services = [
   [
     Sparkles,
@@ -90,6 +180,26 @@ export const services = [
     ],
     images.serviceFitness,
     "Longevity & Fitness",
+    [
+      {
+        num: "01",
+        title: "MOBILITY & FLEXIBILITY",
+        description:
+          "Targeted movements to restore full joint articulation, release stiff muscle groups, and regain effortless daily mobility.",
+      },
+      {
+        num: "02",
+        title: "CORE STABILITY & STRENGTH",
+        description:
+          "Progressive functional conditioning to reinforce core muscle groups, stabilize the spine, and prevent physical strain.",
+      },
+      {
+        num: "03",
+        title: "VITALITY & AGE REVERSAL",
+        description:
+          "Combats age-related muscle degeneration, reduces physical wear, and keeps you active, energized, and confident.",
+      },
+    ],
   ],
   [
     Flower2,
@@ -102,18 +212,26 @@ export const services = [
     ],
     images.serviceRelaxation,
     "Recovery & Wellness",
-  ],
-  [
-    Gift,
-    "Complimentary Physiotherapy",
     [
-      "Free treatments for injury recovery & prevention.",
-      "Priority clinical assessment with certified therapists.",
-      "Exclusive member-only care whenever pain strikes.",
-      "Complete rehabilitation peace of mind.",
+      {
+        num: "01",
+        title: "DEEP TISSUE RESTORATION",
+        description:
+          "Rejuvenates tired fascia and tight muscle structures, releasing chronic muscle tension and post-work fatigue.",
+      },
+      {
+        num: "02",
+        title: "STRESS & BURNOUT RELIEF",
+        description:
+          "Calms the nervous system through sensory stimulation and endorphin flow, relieving mental strain and fatigue.",
+      },
+      {
+        num: "03",
+        title: "CIRCULATION & SLEEP QUALITY",
+        description:
+          "Improves micro-vascular circulation to flush metabolic waste, expedite healing, and promote deep restful sleep.",
+      },
     ],
-    images.servicePhysio,
-    "Clinical Care",
   ],
 ] as const;
 

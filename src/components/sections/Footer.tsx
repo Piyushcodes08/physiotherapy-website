@@ -49,7 +49,7 @@ export function Footer({ onBook }: FooterProps) {
 
       {/* Top appointment bar */}
       <div className="border-b border-white/10">
-        <div className="mx-auto flex w-full max-w-[1170px] flex-col items-start justify-between gap-5 px-4 py-8 sm:flex-row sm:items-center sm:px-6 lg:px-8 lg:py-10">
+        <div className="mx-auto flex w-full max-w-[1170px] flex-col items-center text-center justify-between gap-5 px-4 py-6 sm:flex-row sm:items-center sm:text-left sm:px-6 lg:px-8 lg:py-8">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300 sm:text-xs">
               Begin your recovery
@@ -63,7 +63,7 @@ export function Footer({ onBook }: FooterProps) {
           <motion.button
             type="button"
             onClick={onBook}
-            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors duration-300 hover:bg-emerald-100"
+            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-white px-7 py-3 text-sm font-semibold text-emerald-950 transition-colors duration-300 hover:bg-emerald-100 cursor-pointer"
             whileHover={shouldReduceMotion ? undefined : { y: -3 }}
             whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
           >
@@ -75,9 +75,9 @@ export function Footer({ onBook }: FooterProps) {
       </div>
 
       {/* Main footer */}
-      <div className="mx-auto grid w-full max-w-[1170px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.15fr_0.65fr_0.85fr_1.25fr] lg:gap-8 lg:px-8 lg:py-16">
+      <div className="mx-auto grid w-full max-w-[1170px] gap-10 px-4 py-10 sm:px-6 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.65fr_0.85fr_1.25fr] lg:gap-8 lg:px-8 lg:py-12 text-center sm:text-left">
         {/* Brand */}
-        <div>
+        <div className="flex flex-col items-center sm:items-start">
           <a
             href="#home"
             className="group inline-flex items-center gap-3"
@@ -90,12 +90,12 @@ export function Footer({ onBook }: FooterProps) {
             />
           </a>
 
-          <p className="mt-6 max-w-[290px] text-sm leading-6 text-white/60">
+          <p className="mt-6 max-w-[290px] text-sm leading-6 text-white/60 mx-auto sm:mx-0">
             Professional and compassionate physiotherapy care focused on
             restoring movement, reducing pain and supporting long-term recovery.
           </p>
 
-          <div className="mt-6 inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5">
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_5px_rgba(52,211,153,0.1)]" />
 
             <span className="text-xs font-medium text-white/70">
@@ -105,10 +105,10 @@ export function Footer({ onBook }: FooterProps) {
         </div>
 
         {/* Quick links */}
-        <div>
+        <div className="flex flex-col items-center sm:items-start">
           <h3 className="font-montserrat text-sm font-semibold text-white">Quick links</h3>
 
-          <div className="mt-5 flex flex-col items-start gap-3.5">
+          <div className="mt-5 flex flex-col items-center sm:items-start gap-3.5">
             {quickLinks.map(([label, href]) => (
               <a
                 key={label}
@@ -124,10 +124,11 @@ export function Footer({ onBook }: FooterProps) {
         </div>
 
         {/* Contact information */}
-        <div>
+        <div className="flex flex-col items-center sm:items-start">
           <h3 className="font-montserrat text-sm font-semibold text-white">Contact</h3>
 
-          <div className="mt-5 space-y-3.5">
+          <div className="mt-5 space-y-3.5 w-full max-w-xs sm:max-w-none">
+            {/* Phone rows — always show full text */}
             {clinicInfo.phones.map((phone) => (
               <a
                 key={phone.number}
@@ -150,94 +151,138 @@ export function Footer({ onBook }: FooterProps) {
               </a>
             ))}
 
-            <a
-              href={`mailto:${clinicInfo.email}`}
-              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+            {/* Icon-only row on mobile for the rest; full list on sm+ */}
+
+            {/* Mobile: 2×2 icon grid */}
+            <div className="flex flex-wrap gap-3 sm:hidden">
+              <a
+                href={`mailto:${clinicInfo.email}`}
+                title={clinicInfo.email}
+                className="group grid h-9 w-9 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 hover:bg-white/12 hover:text-white"
+              >
                 <Mail className="h-4 w-4" />
-              </span>
+              </a>
 
-              <span className="min-w-0">
-                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
-                  Email
-                </small>
-
-                <strong className="mt-1 block break-all text-sm font-medium">
-                  {clinicInfo.email}
-                </strong>
-              </span>
-            </a>
-
-            <a
-              href={clinicInfo.instagram.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+              <a
+                href={clinicInfo.instagram.url}
+                target="_blank"
+                rel="noreferrer"
+                title={`Instagram: @${clinicInfo.instagram.handle}`}
+                className="group grid h-9 w-9 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 hover:bg-white/12 hover:text-white"
+              >
                 <Instagram className="h-4 w-4" />
-              </span>
+              </a>
 
-              <span className="min-w-0">
-                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
-                  Instagram
-                </small>
-
-                <strong className="mt-1 block break-all text-sm font-medium">
-                  @{clinicInfo.instagram.handle}
-                </strong>
-              </span>
-            </a>
-
-            <a
-              href={clinicInfo.youtube.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+              <a
+                href={clinicInfo.youtube.url}
+                target="_blank"
+                rel="noreferrer"
+                title={`YouTube: ${clinicInfo.youtube.handle}`}
+                className="group grid h-9 w-9 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 hover:bg-white/12 hover:text-white"
+              >
                 <Youtube className="h-4 w-4" />
-              </span>
+              </a>
 
-              <span className="min-w-0">
-                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
-                  YouTube
-                </small>
-
-                <strong className="mt-1 block break-all text-sm font-medium">
-                  {clinicInfo.youtube.handle}
-                </strong>
-              </span>
-            </a>
-
-            <div className="flex items-start gap-3 text-white/60">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300">
+              <span
+                title={clinicInfo.hours}
+                className="grid h-9 w-9 place-items-center rounded-xl bg-white/7 text-emerald-300"
+              >
                 <Clock3 className="h-4 w-4" />
               </span>
+            </div>
 
-              <span>
-                <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
-                  Clinic hours
-                </small>
+            {/* Desktop (sm+): full rows with label + text */}
+            <div className="hidden sm:flex sm:flex-col sm:gap-3.5">
+              <a
+                href={`mailto:${clinicInfo.email}`}
+                className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                  <Mail className="h-4 w-4" />
+                </span>
 
-                <strong className="mt-1 block text-sm font-medium leading-5">
-                  {clinicInfo.hours}
-                </strong>
-              </span>
+                <span className="min-w-0">
+                  <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                    Email
+                  </small>
+
+                  <strong className="mt-1 block break-all text-sm font-medium">
+                    {clinicInfo.email}
+                  </strong>
+                </span>
+              </a>
+
+              <a
+                href={clinicInfo.instagram.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                  <Instagram className="h-4 w-4" />
+                </span>
+
+                <span className="min-w-0">
+                  <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                    Instagram
+                  </small>
+
+                  <strong className="mt-1 block break-all text-sm font-medium">
+                    @{clinicInfo.instagram.handle}
+                  </strong>
+                </span>
+              </a>
+
+              <a
+                href={clinicInfo.youtube.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-start gap-3 text-white/60 transition-colors duration-300 hover:text-white"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300 transition-colors duration-300 group-hover:bg-white/12">
+                  <Youtube className="h-4 w-4" />
+                </span>
+
+                <span className="min-w-0">
+                  <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                    YouTube
+                  </small>
+
+                  <strong className="mt-1 block break-all text-sm font-medium">
+                    {clinicInfo.youtube.handle}
+                  </strong>
+                </span>
+              </a>
+
+              <div className="flex items-start gap-3 text-white/60">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/7 text-emerald-300">
+                  <Clock3 className="h-4 w-4" />
+                </span>
+
+                <span>
+                  <small className="block text-[10px] uppercase tracking-[0.14em] text-white/35">
+                    Clinic hours
+                  </small>
+
+                  <strong className="mt-1 block text-sm font-medium leading-5">
+                    {clinicInfo.hours}
+                  </strong>
+                </span>
+              </div>
             </div>
           </div>
+
         </div>
 
         {/* Map */}
-        <div>
+        <div className="flex flex-col items-center sm:items-start w-full">
           <h3 className="font-montserrat text-sm font-semibold text-white">Find our clinic</h3>
 
           <a
             href={clinicInfo.address.mapsUrl}
             target="_blank"
             rel="noreferrer"
-            className="group relative mt-5 block h-[220px] overflow-hidden rounded-xl border border-white/10 bg-emerald-900 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
+            className="group relative mt-5 block h-[220px] w-full max-w-sm sm:max-w-none overflow-hidden rounded-2xl border border-white/10 bg-emerald-900 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
             aria-label="View Health Hunter clinic on Google Maps"
           >
             <motion.img

@@ -74,7 +74,7 @@ function TestimonialCardBody({ quote, name, department, index }: CardContentProp
     <>
       {/* Top section */}
       <div className="relative flex items-start justify-between">
-        <span className="grid h-11 w-11 place-items-center rounded-lg bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-100 text-emerald-800 transition-colors duration-300 group-hover:bg-emerald-950 group-hover:text-white">
           <Quote className="h-4.5 w-4.5 fill-current" strokeWidth={1.5} />
         </span>
 
@@ -106,7 +106,7 @@ function TestimonialCardBody({ quote, name, department, index }: CardContentProp
 
       {/* Patient information */}
       <figcaption className="relative mt-auto flex items-center gap-3 border-t border-emerald-950/8 pt-6">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-xs">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-950 text-xs font-semibold tracking-[0.08em] text-white shadow-xs">
           {initials}
         </span>
 
@@ -120,8 +120,8 @@ function TestimonialCardBody({ quote, name, department, index }: CardContentProp
           </small>
         </span>
 
-        <span className="ml-auto flex items-center gap-1.5 rounded-md bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-800">
-          <span className="h-1.5 w-1.5 rounded-xs bg-emerald-500" />
+        <span className="ml-auto flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-semibold text-emerald-800">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           Verified
         </span>
       </figcaption>
@@ -190,7 +190,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative isolate overflow-hidden bg-[#f7f8f4] py-20 sm:py-24 lg:py-28"
+      className="relative isolate overflow-hidden bg-[#f7f8f4] py-10 sm:py-14 lg:py-16"
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -212,9 +212,9 @@ export function Testimonials() {
         >
           <motion.div
             variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-md border border-emerald-900/10 bg-white/80 px-3 py-1.5 shadow-xs backdrop-blur-md sm:mb-6 sm:px-3.5"
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 px-3.5 py-1.5 shadow-xs backdrop-blur-md sm:mb-6"
           >
-            <span className="grid h-5 w-5 place-items-center rounded-xs bg-emerald-100 text-emerald-700">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-100 text-emerald-700">
               <Sparkles className="h-3 w-3" />
             </span>
 
@@ -251,7 +251,7 @@ export function Testimonials() {
             <motion.figure
               key={name}
               variants={fadeUp}
-              className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.045)] transition-colors duration-300 hover:border-emerald-900/20 sm:p-7"
+              className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-3xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.045)] transition-colors duration-300 hover:border-emerald-900/20 sm:p-7"
               whileHover={
                 shouldReduceMotion
                   ? undefined
@@ -301,7 +301,7 @@ export function Testimonials() {
             </div>
 
             {/* Slider Card with Framer Motion and Touch Swipe */}
-            <div className="relative min-h-[360px] overflow-hidden rounded-xl">
+            <div className="relative min-h-[360px] overflow-hidden rounded-3xl">
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.figure
                   key={currentIndex}
@@ -321,7 +321,7 @@ export function Testimonials() {
                       handlePrev();
                     }
                   }}
-                  className="group relative flex min-h-[360px] w-full flex-col overflow-hidden rounded-xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.06)] touch-pan-y"
+                  className="group relative flex min-h-[360px] w-full flex-col overflow-hidden rounded-3xl border border-emerald-950/8 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.06)] touch-pan-y"
                 >
                   <TestimonialCardBody
                     quote={currentStory[0]}
@@ -340,7 +340,7 @@ export function Testimonials() {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous testimonial"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50 cursor-pointer"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -379,7 +379,7 @@ export function Testimonials() {
                 type="button"
                 onClick={handleNext}
                 aria-label="Next testimonial"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-emerald-950/10 bg-white text-emerald-900 shadow-xs transition-all duration-200 active:scale-95 active:bg-emerald-50 cursor-pointer"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -394,7 +394,7 @@ export function Testimonials() {
 
         {/* Trust summary with minimal radius */}
         <motion.div
-          className="mt-10 grid overflow-hidden rounded-xl border border-emerald-900/10 bg-emerald-950 text-white shadow-[0_16px_40px_rgba(6,78,59,0.15)] sm:grid-cols-3"
+          className="mt-10 grid overflow-hidden rounded-3xl border border-emerald-900/10 bg-emerald-950 text-white shadow-[0_16px_40px_rgba(6,78,59,0.15)] sm:grid-cols-3"
           initial={{
             opacity: 0,
             y: shouldReduceMotion ? 0 : 20,

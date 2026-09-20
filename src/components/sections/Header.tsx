@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { clinicInfo, getWhatsAppBookingUrl, images, navigation } from "../../data/siteData";
+import { clinicInfo, getWhatsAppBookingUrl, navigation } from "../../data/siteData";
+import { LogoFull } from "../Logo";
 
 type NavigationItem = (typeof navigation)[number];
 
@@ -59,23 +60,22 @@ export function Header({ onBook }: HeaderProps) {
           className="group flex shrink-0 items-center gap-3"
           aria-label="Health Hunter home"
         >
-          <img
-            src={images.logo}
-            alt="Health Hunter"
-            className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          <LogoFull
+            className="h-9 sm:h-10 w-auto text-slate-900 transition-transform duration-300 group-hover:scale-105"
+            accentColor="#10b981"
           />
         </a>
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center rounded-lg border border-slate-200/80 bg-white/75 p-1 shadow-xs lg:flex"
+          className="hidden items-center rounded-full border border-slate-200/80 bg-white/75 p-1.5 shadow-xs lg:flex"
           aria-label="Main navigation"
         >
           {navigation.map((item) => (
             <a
               key={item}
               href={`#${getSectionId(item)}`}
-              className="rounded-md px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors duration-200 hover:bg-emerald-50 hover:text-emerald-950 xl:px-4.5"
+              className="rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600 transition-colors duration-200 hover:bg-emerald-50 hover:text-emerald-950 xl:px-4.5"
             >
               {item}
             </a>
@@ -87,7 +87,7 @@ export function Header({ onBook }: HeaderProps) {
           <button
             type="button"
             onClick={onBook}
-            className="group inline-flex h-10.5 items-center justify-center gap-2 rounded-lg bg-emerald-950 px-4.5 text-sm font-medium text-white shadow-[0_10px_25px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-[0_14px_30px_rgba(4,120,87,0.22)]"
+            className="group inline-flex h-10.5 items-center justify-center gap-2 rounded-full bg-emerald-950 px-5 text-sm font-medium text-white shadow-[0_10px_25px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-[0_14px_30px_rgba(4,120,87,0.22)]"
           >
             Book appointment
             <ArrowUpRight
@@ -101,7 +101,7 @@ export function Header({ onBook }: HeaderProps) {
         <button
           type="button"
           onClick={() => setOpen((current) => !current)}
-          className="grid h-10 w-10 place-items-center rounded-lg border border-slate-200 bg-white text-slate-950 shadow-xs transition-colors hover:bg-slate-100 lg:hidden"
+          className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-xs transition-colors hover:bg-slate-100 lg:hidden cursor-pointer"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
         >
@@ -140,7 +140,7 @@ export function Header({ onBook }: HeaderProps) {
             <motion.div
               role="dialog"
               aria-label="Mobile navigation"
-              className="absolute left-4 right-4 top-[78px] z-50 overflow-hidden rounded-xl border border-slate-200 bg-white p-3.5 shadow-[0_20px_50px_rgba(15,23,42,0.18)] sm:left-6 sm:right-6 lg:hidden"
+              className="absolute left-4 right-4 top-[78px] z-50 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3.5 shadow-[0_20px_50px_rgba(15,23,42,0.18)] sm:left-6 sm:right-6 lg:hidden"
               initial={{ opacity: 0, y: -10, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
@@ -152,7 +152,7 @@ export function Header({ onBook }: HeaderProps) {
                     key={item}
                     href={`#${getSectionId(item)}`}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-950"
+                    className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-950"
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.03 }}
@@ -171,7 +171,7 @@ export function Header({ onBook }: HeaderProps) {
                   setOpen(false);
                   if (onBook) onBook();
                 }}
-                className="flex w-full h-11 items-center justify-center gap-2 rounded-lg bg-emerald-950 px-5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-emerald-800 cursor-pointer"
+                className="flex w-full h-11 items-center justify-center gap-2 rounded-full bg-emerald-950 px-5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-emerald-800 cursor-pointer"
               >
                 <span>Book appointment</span>
                 <ArrowUpRight className="h-4 w-4" />

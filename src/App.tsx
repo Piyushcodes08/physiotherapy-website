@@ -6,6 +6,7 @@ import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 import { Header } from "./components/sections/Header";
 import { Hero } from "./components/sections/Hero";
+import { CoreServices } from "./components/sections/CoreServices";
 import { Services } from "./components/sections/Services";
 import { Team } from "./components/sections/Team";
 import { Testimonials } from "./components/sections/Testimonials";
@@ -25,9 +26,11 @@ export default function App() {
     <main>
       <Header onBook={() => handleOpenBooking()} />
       <Hero onBook={() => handleOpenBooking()} />
-      <About onBook={() => handleOpenBooking()} />
+      <CoreServices onBook={(service) => handleOpenBooking(service)} />
+        <About onBook={() => handleOpenBooking()} />
       <Services onBook={(service) => handleOpenBooking(service)} />
-      <Treatments onBook={(treatment) => handleOpenBooking(treatment)} />
+      
+     
       <Team onBook={() => handleOpenBooking()} />
       <Testimonials />
       <Contact />
@@ -43,7 +46,7 @@ export default function App() {
         type="button"
         onClick={() => handleOpenBooking()}
         aria-label="Book appointment"
-        className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-lg bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,211,102,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(37,211,102,0.5)] cursor-pointer"
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,211,102,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(37,211,102,0.5)] cursor-pointer"
       >
         <MessageCircle className="h-5 w-5 fill-current" />
         <span className="hidden sm:inline">Book appointment</span>
